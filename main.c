@@ -2,9 +2,8 @@
 #include "pila.h"
 
 int main(){
-    printf("Hola mundo");
-    
-    
+    APila p = apila_crear(10);
+    apila_destruir(p);
 
     return 0;
 }

@@ -11,7 +11,8 @@ APila apila_crear(int tamInicial){
     /*Agregue su codigo de implementacion aqui*/
     APila p;
     p = (APila) malloc (sizeof(_APila));
-    CONFIRM_RETVAL(p, NULL);
+    if (p == NULL) return NULL;
+    
     void** elem = (void*) malloc(sizeof(void*) * tamInicial);
     if (elem == NULL)
     {
@@ -64,6 +65,10 @@ BOOLEAN apila_isEmpty(APila p){
     verificar que los datos sean eliminados correctamente.!
  */
 BOOLEAN apila_destruir(APila p){
+    if (p == NULL) return ERROR;
+    free(p->arr);
+    free(p);
+    
     return OK;
 }
 

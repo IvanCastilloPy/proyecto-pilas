@@ -27,4 +27,12 @@ if (!(expr)) { GlobalReportarError(__FILE__, __LINE__);}
 /* Implementado una vez por programa para establecer como manejar errores */
 extern void GlobalReportarError(char* pszFile, int  iLine);
 
+// 1. Implementación de la función que faltaba
+void GlobalReportarError(char* pszFile, int iLine) {
+    printf("\n[ERROR DE VALIDACION]");
+    printf("\nArchivo: %s", pszFile);
+    printf("\nLinea: %d", iLine);
+    printf("\n---------------------\n");
+}
+
 #endif
