@@ -1,4 +1,5 @@
 #include "pila.h"
+#include <stdio.h>
 
 /*Crea una pila implementada con un arreglo dinamico, donde se inicializa con 
  un tamanho inicial, pero se redimensiona cuando se alcanza el limite de almacenamiento
@@ -8,6 +9,19 @@
 APila apila_crear(int tamInicial){
     /*Agregue su codigo de implementacion aqui*/
     APila p;
+    p = (APila) malloc (sizeof(_APila));
+    CONFIRM_RETVAL((NULL = p), NULL);
+    void** elem = (void*) malloc(sizeof(void*) * tamInicial);
+    if (elem == NULL)
+    {
+        free(p);
+        return NULL;
+    }
+
+    p->arr = elem;
+    p->tam = tamInicial;
+    p->sp = 0;
+
 	return p;
 }
 
