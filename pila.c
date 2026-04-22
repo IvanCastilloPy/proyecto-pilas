@@ -1,6 +1,7 @@
 #include "pila.h"
 #include <stdio.h>
 #include <stdlib.h>
+/*Holaprobando*/
 
 /*Crea una pila implementada con un arreglo dinamico, donde se inicializa con 
  un tamanho inicial, pero se redimensiona cuando se alcanza el limite de almacenamiento
@@ -19,12 +20,31 @@ APila apila_crear(int tamInicial){
         free(p);
         return NULL;
     }
-
+    
     p->arr = elem;
     p->tam = tamInicial;
     p->sp = 0;
 
 	return p;
+}
+
+/* Redimensionar 
+ */
+
+BOOLEAN apila_redimencionar(APila p){
+    if (p == NULL) return ERROR;
+
+    void** elem = (void*) malloc(sizeof(void*) * p->tam * 2);
+    if (elem == NULL) return ERROR;
+
+    for (int i = 0; i < p->sp; i++)
+    {
+        elem[i] = p->arr[i];
+    }
+
+    p->arr = elem;
+
+    return OK;
 }
 
 /* Agrega un elemento a la pila (utilizando el metodo LIFO), el parametro void* valor significa que pasamos la direccion
@@ -33,6 +53,16 @@ APila apila_crear(int tamInicial){
  */
 BOOLEAN apila_push(APila p, void* valor){
     /*Agregue su codigo de implementacion aqui*/
+    if (p == NULL) return ERROR;
+    
+    if (p->sp == p->tam)
+    {
+        if (!apila_redimencionar(p)) return ERROR;
+    }
+    
+    p->arr[p->sp] = valor;
+    p->sp++;
+
     return OK;
 }
 /* Saca un elemento de la pila (utilizando el metodo LIFO), el parametro void** retval significa que pasamos la direccion
@@ -42,6 +72,13 @@ BOOLEAN apila_push(APila p, void* valor){
  */
 BOOLEAN apila_pop(APila p, void** retval){
     /*Agregue su codigo de implementacion aqui*/
+    if (p == NULL) return ERROR;
+
+    if (p->sp == 0) return ERROR;
+
+    retval = &p->arr[p->sp - 1];
+    p->sp--;
+
     return OK;
 }
 /* Muestra el elemento que esta en la cima de la pila (utilizando el metodo LIFO), el parametro void** retval significa que pasamos la direccion
@@ -51,6 +88,12 @@ BOOLEAN apila_pop(APila p, void** retval){
  */
 BOOLEAN apila_top(APila p, void** retval){
     /*Agregue su codigo de implementacion aqui*/
+    if (p == NULL) return ERROR;
+
+    if (p->sp == 0) return ERROR;
+
+    retval = &p->arr[p->sp - 1];
+
     return OK;
 }
 
@@ -59,13 +102,21 @@ BOOLEAN apila_top(APila p, void** retval){
  */
 BOOLEAN apila_isEmpty(APila p){
     /*Agregue su codigo de implementacion aqui*/
-    return TRUE;
+    if (p == NULL) return ERROR;
+
+    if (p->sp == 0) return TRUE;
+
+    return FALSE;
 }
 /* Elimina la pila.
     verificar que los datos sean eliminados correctamente.!
  */
 BOOLEAN apila_destruir(APila p){
     if (p == NULL) return ERROR;
+    for (int i = 0; i < p->sp; i++)
+    {
+        free(p->arr[i]);
+    }
     free(p->arr);
     free(p);
     
