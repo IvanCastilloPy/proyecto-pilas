@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 /*Holaprobando*/
+
 /*Crea una pila implementada con un arreglo dinamico, donde se inicializa con 
  un tamanho inicial, pero se redimensiona cuando se alcanza el limite de almacenamiento
  del arreglo. Esto es, crear un nuevo arreglo mas grande y referenciarlo a la pila.
