@@ -19,6 +19,7 @@ APila apila_crear(int tamInicial){
         free(p);
         return NULL;
     }
+    
 
     p->arr = elem;
     p->tam = tamInicial;
