@@ -20,7 +20,6 @@ APila apila_crear(int tamInicial){
         return NULL;
     }
     
-
     p->arr = elem;
     p->tam = tamInicial;
     p->sp = 0;
